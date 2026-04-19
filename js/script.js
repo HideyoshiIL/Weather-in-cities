@@ -16,9 +16,12 @@ formCity.addEventListener("submit", async (event) => {
 async function weatherRequest(url) {
   const weatherApi = await fetch(url);
   const data = await weatherApi.json();
+  
   const res = {};
   res.temp = data.main.temp;
   res.weather = data.weather[0].description;
   return res;
 }
+
+
 
