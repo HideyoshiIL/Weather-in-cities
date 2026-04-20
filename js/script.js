@@ -1,5 +1,6 @@
 const formCity = document.querySelector("#formCity"),
-      inpInp = document.querySelector(".inpInp");
+      inpInp = document.querySelector(".inpInp"),
+      iconWeather = document.querySelector("#iconWeather");
 
 formCity.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -22,6 +23,23 @@ async function weatherRequest(url) {
   res.weather = data.weather[0].description;
   return res;
 }
+
+
+const weatherIcon = [
+  "fa-sun-o",
+  "fa-cloud" ,
+  "fa-bolt",
+  "fa-snowflake-o",
+  "fa-soundcloud"
+];
+let index = 0;
+
+const weatherInterval = setInterval(() => {
+  iconWeather.classList.remove(weatherIcon[index]);
+  index = (index + 1) % weatherIcon.length;
+  iconWeather.classList.add(weatherIcon[index])
+}, 2000);
+
 
 
 

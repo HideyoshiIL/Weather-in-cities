@@ -44,3 +44,24 @@ body {
   border-radius: 20px;
  background-color: #ebebeb;
 }
+
+#iconWeather {
+  margin: auto;
+  font-size: larger;
+}
+
+.fa-sun-o {
+  color: #eff306;
+}
+.fa-cloud {
+  color:rgb(255, 255, 255)
+}
+.fa-bolt {
+  color:#ddeb63
+}
+.fa-snowflake-o {
+  color:rgb(167, 249, 255)
+}
+.fa-soundcloud {
+  color: rgba(110, 110, 110, 0.781);
+}
