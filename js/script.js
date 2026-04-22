@@ -1,7 +1,9 @@
 const formCity = document.querySelector("#formCity"),
       inpInp = document.querySelector(".inpInp"),
       iconWeather = document.querySelector("#iconWeather"),
-      container = document.querySelector(".container");
+      container = document.querySelector(".container"),
+      inpBut = document.querySelector("#inpBut");
+
 
 formCity.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -10,16 +12,41 @@ formCity.addEventListener("submit", async (event) => {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${res}&appid=${apiKey}&units=metric&lang=ru`;
 
   
- const data = await weatherRequest(url);
+ try {  const data = await weatherRequest(url); 
+    cardOfWeather(data, res);
+ } catch(err) {
+    let  errorDiv = document.querySelector(".oopsError")
 
- cardOfWeather(data, res);
+    if (!errorDiv){
+    errorDiv = document.createElement("div");
+    errorDiv.classList.add("oopsError");
+    inpBut.after(errorDiv)
+    }
+
+    errorDiv.textContent = err.message;
+    formCity.style.border = "2px solid red";
+
+    setTimeout(() => {
+      errorDiv.remove();
+      formCity.style.border = "";
+    },3000)
+    
+  }
+
 
  event.target.reset();
 })
 
+
+
 async function weatherRequest(url) {
   const weatherApi = await fetch(url);
   const data = await weatherApi.json();
+
+
+   if (data.cod !== 200) {
+    throw  new Error(`Что-то пошло не так!`)
+  }
 
   const iconCode = data.weather[0].icon;
   const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
@@ -31,6 +58,7 @@ async function weatherRequest(url) {
   res.icon = iconUrl;
   return res;
 }
+
 
 
 const weatherIcon = [
@@ -69,3 +97,11 @@ const weatherInterval = setInterval(() => {
   container.append(div)
 }
 
+
+container.addEventListener("click", (event) => {
+
+  if (event.target.classList.contains("closeCard")) {
+  const card = event.target.closest(".card")
+  card.remove();
+  }
+})
