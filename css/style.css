@@ -5,6 +5,8 @@ body {
   background-size: cover;
 }
 
+
+
 .inpCity {
   display: flex;
   justify-content: center;
@@ -64,4 +66,53 @@ body {
 }
 .fa-soundcloud {
   color: rgba(110, 110, 110, 0.781);
+}
+
+.card {
+  display: block;
+  max-width: 400px;
+  min-height: 400px;
+
+
+  border-radius: 20px;
+  background-color: #ffffffa9;
+  border: 1px black solid;
+}
+
+.closeCard {
+float: right;
+margin:  5px 5px 0 0;
+border: 0px;
+background-color: rgba(0, 176, 199, 0.548);
+color: rgb(70, 70, 70);
+border-radius: 20px;
+cursor: pointer;
+}
+
+.inner {
+  padding: 20px;
+  text-align: center;
+}
+
+.tempNow {
+  margin: 20px 0 10px 0;
+  font-weight: 400;
+  font-size: large;
+  font-size: 20px;
+}
+#tempNow {
+  font-size: 30px;
+}
+.weatherNow {
+  margin: 20px 0 10px 0;
+  font-weight: 400;
+  font-size: large;
+}
+
+#weatherNow {
+  font-size: 30px;
+}
+
+.imgWeather {
+  margin-top: 10px;
 }
