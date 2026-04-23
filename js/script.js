@@ -2,8 +2,9 @@ const formCity = document.querySelector("#formCity"),
       inpInp = document.querySelector(".inpInp"),
       iconWeather = document.querySelector("#iconWeather"),
       container = document.querySelector(".container"),
-      inpBut = document.querySelector("#inpBut");
-
+      inpBut = document.querySelector("#inpBut"),
+      overlay = document.querySelector(".overlay"),
+      modal = document.querySelector(".modal")
 
 formCity.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -33,7 +34,6 @@ formCity.addEventListener("submit", async (event) => {
     
   }
 
-
  event.target.reset();
 })
 
@@ -42,7 +42,6 @@ formCity.addEventListener("submit", async (event) => {
 async function weatherRequest(url) {
   const weatherApi = await fetch(url);
   const data = await weatherApi.json();
-
 
    if (data.cod !== 200) {
     throw  new Error(`Что-то пошло не так!`)
@@ -80,6 +79,10 @@ const weatherInterval = setInterval(() => {
  function cardOfWeather (obj, nameOfCity) {
   const div = document.createElement("div");
   div.classList.add("card")
+  overlay.style.display = "flex";
+  formCity.style.display = "none";
+
+  modal.innerHTML = "";
 
   div.innerHTML = `
     <button class="closeCard">X</button>
@@ -94,14 +97,31 @@ const weatherInterval = setInterval(() => {
       <img src="${obj.icon}" alt="weather">
     </div>
   `
-  container.append(div)
+
+
+
+  modal.append(div);
 }
 
 
-container.addEventListener("click", (event) => {
-
-  if (event.target.classList.contains("closeCard")) {
-  const card = event.target.closest(".card")
-  card.remove();
+overlay.addEventListener("click", (event) => {
+ 
+  if (event.target.classList.contains("closeCard")){
+    closeModal();
+  }  else if  (event.target === overlay) {
+    closeModal()
   }
 })
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && overlay.style.display === "flex") {
+    closeModal();
+  }
+})
+
+function closeModal () {
+  modal.innerHTML = "";
+  overlay.style.display = "none";
+  formCity.style.display = "";
+}
+

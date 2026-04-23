@@ -68,16 +68,34 @@ body {
   color: rgba(110, 110, 110, 0.781);
 }
 
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #757b7c88;
+  justify-content: center;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+
+}
 .card {
   display: block;
-  max-width: 400px;
-  min-height: 400px;
-
-
+  width: 400px;
+  height: 450px;
   border-radius: 20px;
   background-color: #ffffffa9;
-  border: 1px black solid;
+  border: 1px #ebebeb solid;
+
 }
+
 
 .closeCard {
 float: right;
@@ -113,9 +131,7 @@ cursor: pointer;
   font-size: 30px;
 }
 
-.imgWeather {
-  margin-top: 10px;
-}
+
 
 .oopsError {
   background-color:#ffffff;
@@ -125,3 +141,4 @@ cursor: pointer;
   padding: 5px;
   color: red;
 }
+
