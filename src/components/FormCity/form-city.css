@@ -1,0 +1,41 @@
+
+.inpCity {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+
+}
+
+#inpName {
+  text-align: center;
+  font-weight: 400;
+  font-size: large;
+
+}
+
+.inpInp {
+  border: 1px solid black;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #ebebeb;
+}
+
+#formCity {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 25px;
+  border: 2px solid #ebebeb;
+  border-radius: 30px;
+  background-color: #ffffff9a;
+
+}
+
+#inpBut {
+  margin-top: 5px;
+  border: 1px solid black;
+  border-radius: 20px;
+ background-color: #ebebeb;
+}
+
