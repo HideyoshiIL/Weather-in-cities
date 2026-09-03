@@ -14,10 +14,12 @@ async function weatherRequest(city) {
   const iconCode = data.weather[0].icon;
   const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
 
+
   const weatherData = {
     temp: data.main.temp,
     weather: text[0].toUpperCase() + text.slice(1),
     icon: iconUrl,
+    cityName: data.name
   };
 
 

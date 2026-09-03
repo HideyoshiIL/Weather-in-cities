@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import FormCity from './components/FormCity/form-city';
 import weatherRequest from './components/Api/api';
+import WeatherModal from './components/Weather-modal/weather-modal';
 
 import './App.css';
 
@@ -12,21 +13,20 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
-    console.log(weather)
-  }, [weather])
-
-  useEffect(() => {
     let timeoutID = null
+
     if (error !== null) {
       timeoutID = setTimeout(() => {
         setError(null)
       }, 2000)
     }
+
     return () => {
       clearTimeout(timeoutID)
     }
   }, [error])
 
+  
   async function prefDef(e, cityWeather) {
     e.preventDefault()
 
@@ -36,6 +36,7 @@ function App() {
 
       const data = await weatherRequest(cityWeather)
       setWeather(data)
+      setIsModalOpen(true)
 
     } catch (error) {
       setError(error.message)
@@ -49,11 +50,7 @@ function App() {
     <div className="container">
 
       <FormCity prefDef={prefDef} error={error} loading={loading} />
-      <div className="overlay">
-        <div className="modal">
-
-        </div>
-      </div>
+      {isModalOpen && <WeatherModal weather={weather} setIsModalOpen={setIsModalOpen} />}
 
     </div>
   )
