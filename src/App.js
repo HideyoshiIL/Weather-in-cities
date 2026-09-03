@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormCity from './components/FormCity/form-city';
 import weatherRequest from './components/Api/api';
 
@@ -11,26 +11,44 @@ function App() {
   const [error, setError] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  useEffect(() => {
+    console.log(weather)
+  }, [weather])
+
+  useEffect(() => {
+    let timeoutID = null
+    if (error !== null) {
+      timeoutID = setTimeout(() => {
+        setError(null)
+      }, 2000)
+    }
+    return () => {
+      clearTimeout(timeoutID)
+    }
+  }, [error])
+
   async function prefDef(e, cityWeather) {
     e.preventDefault()
+
     try {
       setLoading(true)
       setError(null)
+
       const data = await weatherRequest(cityWeather)
       setWeather(data)
-      console.log(weather)
+
     } catch (error) {
       setError(error.message)
+
     } finally {
       setLoading(false)
-      setError(null)
     }
   }
+
   return (
     <div className="container">
 
-      <FormCity prefDef={prefDef} />
-
+      <FormCity prefDef={prefDef} error={error} loading={loading} />
       <div className="overlay">
         <div className="modal">
 
