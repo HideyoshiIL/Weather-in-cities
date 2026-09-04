@@ -7,10 +7,11 @@ import WeatherModal from './components/Weather-modal/weather-modal';
 import './App.css';
 
 function App() {
-  const [weather, setWeather] = useState(null);
+  const [weather, setWeather] = useState(getLocalData('weather'));
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+
 
   useEffect(() => {
     let timeoutID = null
@@ -26,7 +27,26 @@ function App() {
     }
   }, [error])
 
-  
+
+  useEffect(() => {
+    if (weather !== null) {
+      const saveWeather = JSON.stringify(weather)
+      localStorage.setItem("weather", saveWeather)
+    }
+  }, [weather])
+
+  useEffect(() => {
+    if (weather !== null) {
+      setIsModalOpen(true)
+    }
+  },[weather])
+
+  function getLocalData(key) {
+    const item = localStorage.getItem(key)
+
+    return item !== null ? JSON.parse(item) : null
+  }
+
   async function prefDef(e, cityWeather) {
     e.preventDefault()
 
